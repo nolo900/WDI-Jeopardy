@@ -1,0 +1,31 @@
+@import 'bourbon';
+@import 'materialize';
+@import 'style';
+
+$JeopardyPurple: #311b92;
+$JeopardyPurpleLight: #b388ff;
+$greyDarken1: #757575;
+
+html {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
+
+body {
+  background-color: $JeopardyPurple;
+  margin: 20px;
+}
+
+.col{
+
+  &.s2{
+
+
+    &.card{
+      background-color: $greyDarken1;
+      text-align:center;
+    }
+
+  }
+
+}
+
