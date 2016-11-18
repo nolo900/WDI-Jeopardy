@@ -1,7 +1,7 @@
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    // $('.modal').modal();
-    // $('#questionModal').modal('open');
+    $('.modal').modal();  //initializes modal...or something like that
+
 
 
 });
@@ -109,6 +109,8 @@ let game = {
     togglePlayer :  function() {
         this.currentPlayer = this.currentPlayer === 'Player 1' ? 'Player 2' : 'Player 1';
     },
+
+
 
 };
 

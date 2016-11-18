@@ -22,7 +22,7 @@ html
                 div.col.s2.card#header6
                     h4.card-content.white-text JQUERY
             div.row
-                div.col.s2.card#cat1_level200
+                btn.col.s2.card#cat1_level200
                     h3.card-content.white-text $200
                 div.col.s2.card#cat2_level200
                     h3.card-content.white-text $200
@@ -53,7 +53,7 @@ html
             div.row
                 div.col.s2.card#cat1_level600
                     h3.card-content.white-text $600
-                    button.btn(data-target="questionModal") Modal
+                    a.btn.modal-trigger(href="#modal1") Modal
                 div.col.s2.card#cat2_level600
                     h3.card-content.white-text $600
                 div.col.s2.card#cat3_level600
@@ -93,12 +93,12 @@ html
                 div.col.s2.card#cat6_level1000
                     h3.card-content.white-text $1000
 
-            div.modal#questionModal
-                div.modal-content
-                    h4 Modal Header
-                    p A bunch of text
-                div.modal-footer
-                    a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href="!#") Agree
+        div.modal#modal1
+            div.modal-content
+                h4 Modal Header
+                p A bunch of text
+            div.modal-footer
+                a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href="#") Agree
 
 
 
