@@ -4,6 +4,7 @@
 
 $JeopardyPurple: #311b92;
 $JeopardyPurpleLight: #b388ff;
+$lightBlueAccent1: #80d8ff;
 $greyDarken1: #757575;
 
 html {
@@ -19,9 +20,8 @@ body {
 
   &.s2{
 
-
     &.card{
-      background-color: $greyDarken1;
+      background-color: $lightBlueAccent1;
       text-align:center;
     }
 
@@ -29,3 +29,20 @@ body {
 
 }
 
+.modal{
+
+  .modal-content{
+
+    .btn{
+      width:100%;
+      margin: 5px;
+      display: block !important;
+      margin-top: 10px;
+    }
+
+  }
+}
+
+.disabled{
+  background-color: $greyDarken1 !important;
+}

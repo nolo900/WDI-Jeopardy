@@ -7092,5 +7092,14 @@ body {
   margin: 20px; }
 
 .col.s2.card {
-  background-color: #757575;
+  background-color: #80d8ff;
   text-align: center; }
+
+.modal .modal-content .btn, .modal .modal-content .btn-large {
+  width: 100%;
+  margin: 5px;
+  display: block !important;
+  margin-top: 10px; }
+
+.disabled {
+  background-color: #757575 !important; }
