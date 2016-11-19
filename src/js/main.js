@@ -8,7 +8,6 @@ $(document).ready(function(){
 
 });
 
-
 var questionLibrary = [
     {
         category: "HTML",
@@ -133,20 +132,19 @@ var questionLibrary = [
 
 ];
 
-
 let players = {
 
     player1: {
         score: 0,
         name: "Player 1",
+        scoreBoxTag: "#player1score",
     },
     player2: {
         score: 0,
         name: "Player 2",
+        scoreBoxTag: "#player2score",
     }
 }
-
-
 
 let game = {
 
@@ -156,6 +154,14 @@ let game = {
 
         togglePlayer: function () {
             this.currentPlayer = this.currentPlayer === players.player1 ? players.player2 : players.player1;
+            this.updatePlayerScoreboxAndStatus();
+        },
+        updatePlayerScoreboxAndStatus: function() {
+            $(this.currentPlayer.scoreBoxTag).text(this.currentPlayer.score);
+            $('#statusBoard').text("Current Player : " + this.currentPlayer.name);
+        },
+        isCorrectAnswer: function(chosenAnswer) {
+            return chosenAnswer === this.currentQuestion.correctAns;
         },
 
 };
@@ -164,43 +170,45 @@ function processAnswer(){
     var myAnswerButton = this;
     var myID = "#" + myAnswerButton.id;
     var clickedAnswer = $(myID).text();
-    //console.log(clickedAnswer);
 
-    var correctAnswer = game.currentQuestion.correctAns;
+    console.log(game.isCorrectAnswer(clickedAnswer));
 
-    if (clickedAnswer === correctAnswer){
-        console.log("Correct!");
-        //add score to current player
+    if (game.isCorrectAnswer(clickedAnswer)){
         game.currentPlayer.score += game.currentQuestion.value;
-
-
-        //alert user of correct answer
-        $("#modal1").modal('close');
-        $('#modal-player-status').text("CORRECT! Good Job " + game.currentPlayer.name + "!");
-        $('#modal-player-score').text("Score: " + game.currentPlayer.score);
-        $("#modal2").modal('open');
-
+        alertUserOfAnswerValue(game.isCorrectAnswer(clickedAnswer));
     } else {
-        $("#modal1").modal('close');
-        $('#modal-player-status').text("WRONG " + game.currentPlayer.name + "! Study Harder...");
-        $('#modal-player-score').text("Score: " + game.currentPlayer.score);
-        $("#modal2").modal('open');
-
+        game.currentPlayer.score -= game.currentQuestion.value;
+        alertUserOfAnswerValue(game.isCorrectAnswer(clickedAnswer));
     }
 
+    game.updatePlayerScoreboxAndStatus();
     //close modal after a second
-    window.setTimeout(function() {
-        $("#modal2").modal('close');
-    }, 3500);
+    window.setTimeout(function() {$("#modal2").modal('close');}, 3500);
 
-    //disable this question in the question library and Change the card's appearance.
     game.currentQuestion.hasBeenUsed = true;
     $("#" + game.currentCard).addClass('disabled');
 
-    game.currentQuestion = null;
+    //decide who goes next...
+    if (!game.isCorrectAnswer(clickedAnswer)){
+        game.togglePlayer();
+    }
 
+    game.currentQuestion = null;
 }
 
+function alertUserOfAnswerValue(answerIsCorrect){
+    let statusText = "";
+    if (answerIsCorrect === true){
+        statusText = "CORRECT! Good Job " + game.currentPlayer.name + "!";
+    } else {
+        statusText = "WRONG " + game.currentPlayer.name + "! Study Harder...";
+    }
+
+    $("#modal1").modal('close');
+    $('#modal-player-status').text(statusText);
+    $('#modal-player-score').text("Score: " + game.currentPlayer.score);
+    $("#modal2").modal('open');
+}
 
 function getQuestions(category,value){
     let result = "";
@@ -212,17 +220,13 @@ function getQuestions(category,value){
     return result;
 }
 
-
 function loadModal(){
     var myCard = this;
-
-    game.currentCard = myCard.id;
-
     var cardValue = Number(myCard.id.split('_')[1]);
     var cardCat = myCard.id.split('_')[0];
 
+    game.currentCard = myCard.id;
     game.currentQuestion = getQuestions(cardCat,cardValue);
-
 
     if (game.currentQuestion.hasBeenUsed === true) { return;};
 
@@ -232,7 +236,6 @@ function loadModal(){
     $("#q2").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[1]);
     $("#q3").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[2]);
 
-    // $(modalID).modal('open');
     $("#modal1").modal('open');
 
 };

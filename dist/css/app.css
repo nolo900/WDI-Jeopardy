@@ -7088,7 +7088,7 @@ html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif; }
 
 body {
-  background-color: #311b92;
+  background-color: #b388ff;
   margin: 20px; }
 
 .col.s2.card {
@@ -7103,3 +7103,7 @@ body {
 
 .disabled {
   background-color: #757575 !important; }
+
+.header-logo {
+  width: 95%;
+  margin: 15px; }

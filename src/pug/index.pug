@@ -7,17 +7,20 @@ html
         link(rel="stylesheet" href='css/app.css')
 
     body
-        container
+        div.container.center-align
+            img(src="images/Giant_Jeopardy_Logo.png").header-logo
+
+        div.container
             div.row.center-align
-                div.col.s6.card#player1status
+                div.col.s6.card
                     h1.card-title Player 1:
-                    h3.card-content
-                div.col.s6.card#player2status
+                    h3.card-content#player1score 0
+                div.col.s6.card
                     h1.card-title Player 2:
-                    h3.card-content
+                    h3.card-content#player2score 0
             div.row.center-align
-                div.col.s12.card#startGame
-                    h4.card-content Start Game
+                div.col.s12.card
+                    h4.card-content#statusBoard Start Game
             div.row
                 div.col.s2.card#header1
                     h4.card-content.white-text HTML

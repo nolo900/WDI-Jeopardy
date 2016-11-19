@@ -12,37 +12,40 @@ html {
 }
 
 body {
-  background-color: $JeopardyPurple;
+  background-color: $JeopardyPurpleLight;
   margin: 20px;
 }
 
 .col{
-
   &.s2{
-
     &.card{
       background-color: $lightBlueAccent1;
       text-align:center;
     }
-
   }
-
 }
 
 .modal{
-
   .modal-content{
-
     .btn{
       width:100%;
       margin: 5px;
       display: block !important;
       margin-top: 10px;
     }
-
   }
 }
 
 .disabled{
   background-color: $greyDarken1 !important;
+}
+
+.header-logo{
+  width: 95%;
+  margin: 15px;
+  //height: 100px;
+}
+
+.score-box{
+  //height: 100px;
 }
