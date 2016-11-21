@@ -1,14 +1,17 @@
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();  //initializes modal...or something like that
+    $('.modal').modal({dismissible: false});  //initializes modal...or something like that
 
-    $(".card").click(loadModal);
-    $(".btnAnswer").click(processAnswer);
+    $(".question-card").click(loadModal);  // adds event handler for question modal
+    $(".btnAnswer").click(processAnswer); // adds event handler for answerCorrectness modal
 
-
+    $("#player1name").blur(storeName);
+    $("#player2name").blur(storeName);
 });
 
+
 var questionLibrary = [
+    //HTML______________________________________________________________________________
     {
         category: "HTML",
         question: "How do you make a comment in HTML?",
@@ -70,6 +73,8 @@ var questionLibrary = [
         hasBeenUsed: false,
     },
 
+
+    //CSS______________________________________________________________________________
     {
         category: "CSS",
         question: "What does CSS stand for?",
@@ -129,7 +134,129 @@ var questionLibrary = [
         value: 1000,
         hasBeenUsed: false,
     },
-
+    //JS______________________________________________________________________________
+    {
+        category: "JS",
+        question: "Inside which HTML element do we put the JavaScript?",
+        possibleAns: [
+            "<javascript>",
+            "<script>",
+            "<scripting>",
+                ],
+        correctAns: "<script>",
+        value: 200,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JS",
+        question: "What is the correct syntax for referring to an external script called \"xxx.js\"?",
+        possibleAns: [
+            "<script src=\"xxx.js\">",
+            "<script href=\"xxx.js\">",
+            "<script name=\"xxx.js\">"
+        ],
+        correctAns: "<script src=\"xxx.js\">",
+        value: 400,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JS",
+        question: "How do you create a function in JavaScript?",
+        possibleAns: [
+            "function = myFunction()",
+            "function myFunction()",
+            "function:myFunction()"
+        ],
+        correctAns: "function myFunction()",
+        value: 600,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JS",
+        question: "How to insert a comment that has more than one line?",
+        possibleAns: [
+            "/*This comment has more than one line*/",
+            "//This comment has more than one line//",
+            "<!--This comment has more than one line-->"
+        ],
+        correctAns: "/*This comment has more than one line*/",
+        value: 800,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JS",
+        question: "How do you find the number with the highest value of x and y?",
+        possibleAns: [
+            "Math.max(x, y)",
+            "Math.ceil(x, y)",
+            "ceil(x, y)"
+        ],
+        correctAns: "Math.max(x, y)",
+        value: 1000,
+        hasBeenUsed: false,
+    },
+    //PUG______________________________________________________________________________
+    {
+        category: "PUG",
+        question: "How do you create a header?",
+        possibleAns: [
+            "header My Header Text",
+            "(header) My Header Text",
+            "-header (My Header Text)"
+        ],
+        correctAns: "header My Header Text",
+        value: 200,
+        hasBeenUsed: false,
+    },
+    {
+        category: "PUG",
+        question: "How do you reference a CSS file?",
+        possibleAns: [
+            "-stylesheet('/style.css')",
+            "link(rel='stylesheet' href='css/app.css')",
+            "link(rel='stylesheet' src='css/app.css')"
+        ],
+        correctAns: "link(rel='stylesheet' href='css/app.css')",
+        value: 400,
+        hasBeenUsed: false,
+    },
+    {
+        category: "PUG",
+        question: "How do you reference a JS file?",
+        possibleAns: [
+            "-script('/main.js')",
+            "script(src='/main.js')",
+            "link(script='/main.js')"
+        ],
+        correctAns: "script(src='/main.js')",
+        value: 600,
+        hasBeenUsed: false,
+    },
+    {
+        category: "PUG",
+        question: "Which is the correct way to add a class to an HTML element?",
+        possibleAns: [
+            "div+class('my-class')",
+            "h2.myClass",
+            "(header).myClass"
+        ],
+        correctAns: "h2.myClass",
+        value: 800,
+        hasBeenUsed: false,
+    },
+    {
+        category: "PUG",
+        question: "What does this expression do? : <code></code>"
+        ,
+        possibleAns: [
+            "div(class='my-class')",
+            "h2.myClass",
+            "(header).myClass"
+        ],
+        correctAns: "h2.myClass",
+        value: 1000,
+        hasBeenUsed: false,
+    },
 ];
 
 let players = {
@@ -138,31 +265,51 @@ let players = {
         score: 0,
         name: "Player 1",
         scoreBoxTag: "#player1score",
+        scoreCardTag: "#player1card"
     },
     player2: {
         score: 0,
         name: "Player 2",
         scoreBoxTag: "#player2score",
+        scoreCardTag: "#player2card"
     }
 }
 
 let game = {
 
-        currentPlayer: players.player1,
-        currentQuestion: null,
-        currentCard: null,
+    currentPlayer: players.player1,
+    currentQuestion: null,
+    currentCard: null,
 
-        togglePlayer: function () {
-            this.currentPlayer = this.currentPlayer === players.player1 ? players.player2 : players.player1;
-            this.updatePlayerScoreboxAndStatus();
-        },
-        updatePlayerScoreboxAndStatus: function() {
-            $(this.currentPlayer.scoreBoxTag).text(this.currentPlayer.score);
-            $('#statusBoard').text("Current Player : " + this.currentPlayer.name);
-        },
-        isCorrectAnswer: function(chosenAnswer) {
-            return chosenAnswer === this.currentQuestion.correctAns;
-        },
+    isCorrectAnswer: function(chosenAnswer) {
+        return chosenAnswer === this.currentQuestion.correctAns;
+    },
+
+    togglePlayer: function () {
+        this.removeActivePlayerStyle();
+
+        this.currentPlayer = this.currentPlayer === players.player1 ? players.player2 : players.player1;
+        this.updatePlayerScoreboxAndStatus();
+    },
+
+    updatePlayerScoreboxAndStatus: function() {
+        let playerScore = accounting.formatMoney(this.currentPlayer.score,"$",0);
+        $(this.currentPlayer.scoreBoxTag).text(playerScore);
+
+        this.addActivePlayerStyle();
+    },
+
+    removeActivePlayerStyle: function() {
+        $(this.currentPlayer.scoreCardTag).removeClass("activePlayer");
+        $(".chip").remove();
+    },
+
+    addActivePlayerStyle: function () {
+        $(".chip").remove();
+        $(this.currentPlayer.scoreCardTag).addClass("activePlayer");
+        let currentPlayerChip = '<div class="chip">Current Player</div>';
+        $(this.currentPlayer.scoreCardTag).append(currentPlayerChip);
+    }
 
 };
 
@@ -170,8 +317,6 @@ function processAnswer(){
     var myAnswerButton = this;
     var myID = "#" + myAnswerButton.id;
     var clickedAnswer = $(myID).text();
-
-    console.log(game.isCorrectAnswer(clickedAnswer));
 
     if (game.isCorrectAnswer(clickedAnswer)){
         game.currentPlayer.score += game.currentQuestion.value;
@@ -182,8 +327,6 @@ function processAnswer(){
     }
 
     game.updatePlayerScoreboxAndStatus();
-    //close modal after a second
-    window.setTimeout(function() {$("#modal2").modal('close');}, 3500);
 
     game.currentQuestion.hasBeenUsed = true;
     $("#" + game.currentCard).addClass('disabled');
@@ -198,16 +341,18 @@ function processAnswer(){
 
 function alertUserOfAnswerValue(answerIsCorrect){
     let statusText = "";
-    if (answerIsCorrect === true){
+    if (answerIsCorrect){
         statusText = "CORRECT! Good Job " + game.currentPlayer.name + "!";
     } else {
-        statusText = "WRONG " + game.currentPlayer.name + "! Study Harder...";
+        statusText = "Wrong " + game.currentPlayer.name + "! Study Harder...";
     }
 
     $("#modal1").modal('close');
     $('#modal-player-status').text(statusText);
-    $('#modal-player-score').text("Score: " + game.currentPlayer.score);
+    $('#modal-player-score').text("Score: " + accounting.formatMoney(game.currentPlayer.score,"$",0));
     $("#modal2").modal('open');
+
+    window.setTimeout(function() {$("#modal2").modal('close');}, 3500);
 }
 
 function getQuestions(category,value){
@@ -231,12 +376,21 @@ function loadModal(){
     if (game.currentQuestion.hasBeenUsed === true) { return;};
 
     $("#modal-header").text(game.currentQuestion.category + " for $" + game.currentQuestion.value);
-    $("#modal-question").text(getQuestions(cardCat,cardValue).question);
+    $("#modal-question").html(getQuestions(cardCat,cardValue).question);
     $("#q1").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[0]);
     $("#q2").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[1]);
     $("#q3").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[2]);
 
     $("#modal1").modal('open');
 
-};
+}
 
+function storeName(){
+    let realName = $("#" + this.id).text();
+
+    if (this.id === "player1name"){
+        players.player1.name = realName;
+    } else if (this.id === "player2name"){
+        players.player2.name = realName;
+    }
+}

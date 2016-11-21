@@ -2,28 +2,69 @@
 @import 'materialize';
 @import 'style';
 
-$JeopardyPurple: #311b92;
-$JeopardyPurpleLight: #b388ff;
+//$JeopardyPurple: #311b92;
+$mainBackgroundColor: #0277bd;
+$headerCardColor: #00796b;
 $lightBlueAccent1: #80d8ff;
 $greyDarken1: #757575;
+$questionCardColor: #0097a7;
 
 html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif;
 }
 
 body {
-  background-color: $JeopardyPurpleLight;
+  background-color: $mainBackgroundColor;
   margin: 20px;
+
+  min-width: 1200px;
+}
+
+.col.card-panel{
+  background-color: lighten($headerCardColor, 5%);
+  color: white;;
+}
+
+.activePlayer{
+  @extend .z-depth-5;
+}
+
+.chip{
+  background-color: #8bc34a;
 }
 
 .col{
   &.s2{
+
     &.card{
-      background-color: $lightBlueAccent1;
+
+      &.question-card{
+        background-color: $questionCardColor;
+
+        &:hover{
+          background-color: lighten($questionCardColor, 5%);
+          @extend .z-depth-4;
+        }
+
+        &.disabled{
+          &:hover{
+            @extend .z-depth-1;
+          }
+        }
+
+      }
+
+      &.header-card{
+        background-color: $headerCardColor;
+      }
+
       text-align:center;
+
     }
+
   }
 }
+
 
 .modal{
   .modal-content{
@@ -36,6 +77,12 @@ body {
   }
 }
 
+.btn.btn-large  {
+    background-color: #76ff03;
+    color: black;
+  }
+
+
 .disabled{
   background-color: $greyDarken1 !important;
 }
@@ -43,9 +90,5 @@ body {
 .header-logo{
   width: 95%;
   margin: 15px;
-  //height: 100px;
-}
-
-.score-box{
   //height: 100px;
 }

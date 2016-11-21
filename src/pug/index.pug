@@ -12,98 +12,100 @@ html
 
         div.container
             div.row.center-align
-                div.col.s6.card
-                    h1.card-title Player 1:
+                div.col.s4.offset-s1.card-panel#player1card
+                    h1.card-title#player1name(contenteditable="true") Player 1
                     h3.card-content#player1score 0
-                div.col.s6.card
-                    h1.card-title Player 2:
+
+                div.col.s4.offset-s2.card-panel#player2card
+                    h1.card-title#player2name(contenteditable="true") Player 2
                     h3.card-content#player2score 0
-            div.row.center-align
-                div.col.s12.card
-                    h4.card-content#statusBoard Start Game
+
+            //div.row.center-align
+            //    div.col.s12.card-panel
+            //        h3#statusBoard Start Game
+            //        //div.btn.btn-large START GAME
             div.row
-                div.col.s2.card#header1
+                div.col.s2.card.header-card#header1
                     h4.card-content.white-text HTML
-                div.col.s2.card#header2
+                div.col.s2.card.header-card#header2
                     h4.card-content.white-text CSS
-                div.col.s2.card#header3
+                div.col.s2.card.header-card#header3
                     h4.card-content.white-text JS
-                div.col.s2.card#header4
+                div.col.s2.card.header-card#header4
                     h4.card-content.white-text PUG
-                div.col.s2.card#header5
+                div.col.s2.card.header-card#header5
                     h4.card-content.white-text SCSS
-                div.col.s2.card#header6
+                div.col.s2.card.header-card#header6
                     h4.card-content.white-text JQUERY
             div.row
-                btn.col.s2.card#HTML_200
+                div.col.s2.card.question-card#HTML_200
                     h3.card-content.white-text $200
-                div.col.s2.card#CSS_200
+                div.col.s2.card.question-card#CSS_200
                     h3.card-content.white-text $200
-                div.col.s2.card#JS_200
+                div.col.s2.card.question-card#JS_200
                     h3.card-content.white-text $200
-                div.col.s2.card#PUG_200
+                div.col.s2.card.question-card#PUG_200
                     h3.card-content.white-text $200
-                div.col.s2.card#SCSS_200
+                div.col.s2.card.question-card#SCSS_200
                     h3.card-content.white-text $200
-                div.col.s2.card#JQUERY_200
+                div.col.s2.card.question-card#JQUERY_200
                     h3.card-content.white-text $200
 
             div.row
-                div.col.s2.card#HTML_400
+                div.col.s2.card.question-card#HTML_400
                     h3.card-content.white-text $400
-                div.col.s2.card#CSS_400
+                div.col.s2.card.question-card#CSS_400
                     h3.card-content.white-text $400
-                div.col.s2.card#JS_400
+                div.col.s2.card.question-card#JS_400
                     h3.card-content.white-text $400
-                div.col.s2.card#PUG_400
+                div.col.s2.card.question-card#PUG_400
                     h3.card-content.white-text $400
-                div.col.s2.card#SCSS_400
+                div.col.s2.card.question-card#SCSS_400
                     h3.card-content.white-text $400
-                div.col.s2.card#JQUERY_400
+                div.col.s2.card.question-card#JQUERY_400
                     h3.card-content.white-text $400
 
 
             div.row
-                div.col.s2.card#HTML_600
+                div.col.s2.card.question-card#HTML_600
                     h3.card-content.white-text $600
-                    //a.btn.modal-trigger(href="#modal1") Modal
-                div.col.s2.card#CSS_600
+                div.col.s2.card.question-card#CSS_600
                     h3.card-content.white-text $600
-                div.col.s2.card#JS_600
+                div.col.s2.card.question-card#JS_600
                     h3.card-content.white-text $600
-                div.col.s2.card#PUG_600
+                div.col.s2.card.question-card#PUG_600
                     h3.card-content.white-text $600
-                div.col.s2.card#SCSS_600
+                div.col.s2.card.question-card#SCSS_600
                     h3.card-content.white-text $600
-                div.col.s2.card#JQUERY_600
+                div.col.s2.card.question-card#JQUERY_600
                     h3.card-content.white-text $600
 
             div.row
-                div.col.s2.card#HTML_800
+                div.col.s2.card.question-card#HTML_800
                     h3.card-content.white-text $800
-                div.col.s2.card#CSS_800
+                div.col.s2.card.question-card#CSS_800
                     h3.card-content.white-text $800
-                div.col.s2.card#JS_800
+                div.col.s2.card.question-card#JS_800
                     h3.card-content.white-text $800
-                div.col.s2.card#PUG_800
+                div.col.s2.card.question-card#PUG_800
                     h3.card-content.white-text $800
-                div.col.s2.card#SCSS_800
+                div.col.s2.card.question-card#SCSS_800
                     h3.card-content.white-text $800
-                div.col.s2.card#JQUERY_800
+                div.col.s2.card.question-card#JQUERY_800
                     h3.card-content.white-text $800
 
             div.row
-                div.col.s2.card#HTML_1000
+                div.col.s2.card.question-card#HTML_1000
                     h3.card-content.white-text $1000
-                div.col.s2.card#CSS_1000
+                div.col.s2.card.question-card#CSS_1000
                     h3.card-content.white-text $1000
-                div.col.s2.card#JS_1000
+                div.col.s2.card.question-card#JS_1000
                     h3.card-content.white-text $1000
-                div.col.s2.card#PUG_1000
+                div.col.s2.card.question-card#PUG_1000
                     h3.card-content.white-text $1000
-                div.col.s2.card#SCSS_1000
+                div.col.s2.card.question-card#SCSS_1000
                     h3.card-content.white-text $1000
-                div.col.s2.card#JQUERY_1000
+                div.col.s2.card.question-card#JQUERY_1000
                     h3.card-content.white-text $1000
 
         div.modal#modal1
@@ -123,6 +125,7 @@ html
 
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js")
+        script(src="js/accounting.js")
         script(src="js/main.js")
 
 
