@@ -20,10 +20,9 @@ html
                     h1.card-title#player2name(contenteditable="true") Player 2
                     h3.card-content#player2score 0
 
-            //div.row.center-align
-            //    div.col.s12.card-panel
-            //        h3#statusBoard Start Game
-            //        //div.btn.btn-large START GAME
+            //button.btn.btn-large#startButton Start
+            button.btn.btn-large#resetButton Reset
+
             div.row
                 div.col.s2.card.header-card#header1
                     h4.card-content.white-text HTML
@@ -113,9 +112,11 @@ html
                 h1#modal-header Modal Header
                 h3#modal-question default
                 hr
-                h5.button.waves-effect.waves-light.btn.btnAnswer#q1
-                h5.button.waves-effect.waves-light.btn.btnAnswer#q2
-                h5.button.waves-effect.waves-light.btn.btnAnswer#q3
+                h4.btnAnswer#q1
+                h4.btnAnswer#q2
+                h4.btnAnswer#q3
+
+                //div.button.waves-effect.waves-light.btn.btnAnswer#q3
 
         div.modal#modal2
             div.modal-content.center-align
@@ -123,8 +124,15 @@ html
                 hr
                 H4#modal-player-score
 
+        div.modal#startModal
+            div.modal-content.center-align
+                h3#startHeader Welcome to Web Jeopardy
+                hr
+                h3#startInstructions Enter your names and choose a card!
+
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js")
+        script(src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js")
         script(src="js/accounting.js")
         script(src="js/main.js")
 

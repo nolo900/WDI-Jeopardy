@@ -7,6 +7,7 @@ $mainBackgroundColor: #0277bd;
 $headerCardColor: #00796b;
 $lightBlueAccent1: #80d8ff;
 $greyDarken1: #757575;
+$codeBox: #e65100 ;
 $questionCardColor: #0097a7;
 
 html {
@@ -27,6 +28,12 @@ body {
 
 .activePlayer{
   @extend .z-depth-5;
+}
+
+#player1name,#player2name{
+  &:focus{
+    outline: 0;
+  }
 }
 
 .chip{
@@ -80,6 +87,7 @@ body {
 .btn.btn-large  {
     background-color: #76ff03;
     color: black;
+    text-wrap: normal;
   }
 
 
@@ -91,4 +99,35 @@ body {
   width: 95%;
   margin: 15px;
   //height: 100px;
+}
+
+code {
+  text-align:center;
+  color:white;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+pre{
+  text-align: left;
+  background-color: $codeBox;
+  border: none;
+
+  &:hover{
+    background-color: lighten($codeBox, 10%);
+    @extend .z-depth-4;
+  }
+
+}
+//#startButton {
+//  position: fixed;
+//  top: 0;
+//  left: 0;
+//}
+#resetButton {
+  background-color: #e51c23;
+  color:white;
+  position: fixed;
+  top: 0;
+  right: 0;
 }

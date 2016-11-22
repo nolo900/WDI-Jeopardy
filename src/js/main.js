@@ -4,9 +4,16 @@ $(document).ready(function(){
 
     $(".question-card").click(loadModal);  // adds event handler for question modal
     $(".btnAnswer").click(processAnswer); // adds event handler for answerCorrectness modal
+    //$("#startButton").click(loadStartModal);
+
+    $("#resetButton").click(resetGame);
+    $("#resetButton").hide();
 
     $("#player1name").blur(storeName);
     $("#player2name").blur(storeName);
+
+    loadStartModal();
+
 });
 
 
@@ -90,9 +97,9 @@ var questionLibrary = [
         category: "CSS",
         question: "What is the correct HTML for referring to an external style sheet?",
         possibleAns: [
-            "<stylesheet>mystyle.css</stylesheet>",
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">",
-            "<style src=\"mystyle.css\">"
+            '<stylesheet>mystyle.css</stylesheet>',
+            '<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">',
+            '<style src=\"mystyle.css\">'
         ],
         correctAns: "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">",
         value: 400,
@@ -126,11 +133,26 @@ var questionLibrary = [
         category: "CSS",
         question: "Which is the correct CSS syntax?",
         possibleAns: [
-            "body {color: black;}",
-            "body:color=black;",
-            "{body:color=black;}"
+            `
+                body {
+                    color: black;
+                }
+            `,
+            `
+                body: color=black;
+            `,
+            `
+                {
+                    body: color=black;
+                }
+            `
         ],
-        correctAns: "body {color: black;}",
+        correctAns:
+            `
+                body {
+                    color: black;
+                }
+            `,
         value: 1000,
         hasBeenUsed: false,
     },
@@ -246,15 +268,114 @@ var questionLibrary = [
     },
     {
         category: "PUG",
-        question: "What does this expression do? : <code></code>"
+        question: "How do you create a variable in PUG?"
         ,
         possibleAns: [
-            "div(class='my-class')",
-            "h2.myClass",
-            "(header).myClass"
+            "- var myVariable = 10",
+            "+myVariable = 10",
+            "$myVariable = 10"
         ],
-        correctAns: "h2.myClass",
+        correctAns: "- var myVariable = 10",
         value: 1000,
+        hasBeenUsed: false,
+    },
+    //SCSS__________________________________________________________________________________
+    {
+        category: "SCSS",
+        question: "What's the proper syntax for creating a variable?"
+        ,
+        possibleAns: [
+            "- var myVariable = 10",
+            "+myVariable = 10",
+            "$myVariable = 10"
+        ],
+        correctAns: "- var myVariable = 10",
+        value: 200,
+        hasBeenUsed: false,
+    },
+    {
+        category: "SCSS",
+        question: "What's the proper syntax for creating a variable?"
+        ,
+        possibleAns: [
+            "- var myVariable = Helvetica",
+            "$myVariable = #efefef",
+            "$myVariable: red"
+        ],
+        correctAns: "$myVariable: red",
+        value: 400,
+        hasBeenUsed: false,
+    },
+    {
+        category: "SCSS",
+        question: "How do you target elements that are inside other elements?"
+        ,
+        possibleAns: [
+            `
+                .container { 
+                    &: .subContainer { 
+                        color: blue; 
+                        } 
+                    }
+            `,
+            `
+                .container { 
+                    .subContainer { 
+                        color: blue; 
+                        } 
+                    }
+            `,
+            `
+                .container & .subContainer { 
+                    color: blue; 
+                    }
+            `
+        ],
+        correctAns: `
+                .container { 
+                    &: .subContainer { 
+                        color: blue; 
+                        } 
+                    }
+            `,
+        value: 600,
+        hasBeenUsed: false,
+    },
+    {
+        category: "SCSS",
+        question: ""
+        ,
+        possibleAns: [
+            ` 
+            nav {
+                  ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+            }
+            `,
+            `
+            nav {
+                  ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+            }
+            `,
+            `
+            nav {
+                  ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+            }
+            `
+        ],
+        correctAns: ".container{ &: .subContainer { color: blue; } }",
+        value: 800,
         hasBeenUsed: false,
     },
 ];
@@ -282,7 +403,7 @@ let game = {
     currentCard: null,
 
     isCorrectAnswer: function(chosenAnswer) {
-        return chosenAnswer === this.currentQuestion.correctAns;
+        return chosenAnswer === this.currentQuestion.correctAns.replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
     },
 
     togglePlayer: function () {
@@ -309,6 +430,16 @@ let game = {
         $(this.currentPlayer.scoreCardTag).addClass("activePlayer");
         let currentPlayerChip = '<div class="chip">Current Player</div>';
         $(this.currentPlayer.scoreCardTag).append(currentPlayerChip);
+    },
+
+    isEndOfGame: function() {
+        questionLibrary.forEach(function (item) {
+            if (item.hasBeenUsed === false){
+                return false ;
+            } else {
+                return true;
+            }
+        });
     }
 
 };
@@ -316,7 +447,8 @@ let game = {
 function processAnswer(){
     var myAnswerButton = this;
     var myID = "#" + myAnswerButton.id;
-    var clickedAnswer = $(myID).text();
+    var clickedAnswer = $(myID).text().replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ");
+    //var clickedAnswer = $(myID).html();
 
     if (game.isCorrectAnswer(clickedAnswer)){
         game.currentPlayer.score += game.currentQuestion.value;
@@ -337,6 +469,14 @@ function processAnswer(){
     }
 
     game.currentQuestion = null;
+
+    if (game.isEndOfGame()){
+        //Display winner modal with player of highest score
+        // resetGame();
+    }
+
+
+
 }
 
 function alertUserOfAnswerValue(answerIsCorrect){
@@ -375,15 +515,64 @@ function loadModal(){
 
     if (game.currentQuestion.hasBeenUsed === true) { return;};
 
+    var ans1 = HtmlEncode(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[0]);
+    var ans2 = HtmlEncode(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[1]);
+    var ans3 = HtmlEncode(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[2]);
+
+    ans1 = '<pre class="prettyprint"><code>' + ans1 + '</code></pre>';
+    ans2 = '<pre class="prettyprint"><code>' + ans2 + '</code></pre>';
+    ans3 = '<pre class="prettyprint"><code>' + ans3 + '</code></pre>';
+
+
     $("#modal-header").text(game.currentQuestion.category + " for $" + game.currentQuestion.value);
-    $("#modal-question").html(getQuestions(cardCat,cardValue).question);
-    $("#q1").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[0]);
-    $("#q2").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[1]);
-    $("#q3").text(getQuestions(game.currentQuestion.category,game.currentQuestion.value).possibleAns[2]);
+    $("#modal-question").text(getQuestions(cardCat,cardValue).question);
+    $("#q1").html(ans1);
+    $("#q2").html(ans2);
+    $("#q3").html(ans3);
 
     $("#modal1").modal('open');
 
 }
+
+function loadStartModal(){
+    $("#startModal").modal('open');
+    $('#startButton').hide();
+    $('#resetButton').show();
+    $('.question-card').removeClass('disabled');
+    window.setTimeout(function() {$("#startModal").modal('close');}, 3500);
+}
+
+function resetGame() {
+    players.player1.name = "Player 1";
+    players.player1.score = 0;
+    players.player2.name = "Player 2";
+    players.player2.score = 0;
+
+    game.currentPlayer = players.player1;
+    game.currentQuestion = null;
+    game.currentCard = null;
+
+    $('.chip').remove();
+    $('#player1card').removeClass('activePlayer');
+    $('#player2card').removeClass('activePlayer');
+
+    questionLibrary.forEach(function(item){
+        item.hasBeenUsed = false;
+    });
+
+    $('.question-card').removeClass('disabled');
+
+    $(players.player1.scoreBoxTag).text(0);
+    $(players.player2.scoreBoxTag).text(0);
+
+    $('#player1name').text("Player 1");
+    $('#player2name').text("Player 2");
+
+    $('#resetButton').hide();
+    $('#startButton').show();
+
+}
+
 
 function storeName(){
     let realName = $("#" + this.id).text();
@@ -393,4 +582,12 @@ function storeName(){
     } else if (this.id === "player2name"){
         players.player2.name = realName;
     }
+}
+
+function HtmlEncode(s)
+{
+    var el = document.createElement("div");
+    el.innerText = el.textContent = s;
+    s = el.innerHTML;
+    return s;
 }
