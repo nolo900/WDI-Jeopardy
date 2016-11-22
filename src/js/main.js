@@ -308,7 +308,7 @@ var questionLibrary = [
     },
     {
         category: "SCSS",
-        question: "How do you target elements that are inside other elements?"
+        question: "How do you target elements that are inside other elements and contain a specific element?"
         ,
         possibleAns: [
             `
@@ -343,26 +343,23 @@ var questionLibrary = [
     },
     {
         category: "SCSS",
-        question: ""
+        question: "What is the correct syntax for a styling every unordered list that is within a nav item?"
         ,
         possibleAns: [
             ` 
-            nav {
-                  ul {
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                  }
-            }
+              nav -> ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+              }
             `,
             `
-            nav {
-                  ul {
+            nav
+                  ul
                     margin: 0;
                     padding: 0;
                     list-style: none;
-                  }
-            }
+       
             `,
             `
             nav {
@@ -374,10 +371,116 @@ var questionLibrary = [
             }
             `
         ],
-        correctAns: ".container{ &: .subContainer { color: blue; } }",
+        correctAns: `
+            nav {
+                  ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+            }
+            `,
         value: 800,
         hasBeenUsed: false,
     },
+    {
+        category: "SCSS",
+        question: "How do you add styling to an already existing element?"
+        ,
+        possibleAns: [
+            `
+            .success {
+                .message @import;
+                border-color: green;
+            }
+            `,
+            `
+            .success @extend .message {
+                border-color: green;
+            }
+            `,
+            `
+            .success {
+                @extend .message;
+                border-color: green;
+            }
+            `
+        ],
+        correctAns: `
+            .success {
+                @extend .message;
+                border-color: green;
+            }
+            `,
+        value: 1000,
+        hasBeenUsed: false,
+    },
+    //JQuery__________________________________________________________________________________
+    {
+        category: "JQUERY",
+        question: "Which sign does jQuery use as a shortcut for jQuery?"
+        ,
+        possibleAns: [
+            `the % sign`,
+            `the $ sign`,
+            `the ? sign`
+        ],
+        correctAns: `the $ sign`,
+        value: 200,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JQUERY",
+        question: "What is the correct jQuery code to set the background color of all p elements to red?"
+        ,
+        possibleAns: [
+            `$("p").manipulate("background-color","red");`,
+            `$("p").css("background-color","red");`,
+            `$("p").style("background-color","red");`
+        ],
+        correctAns: `$("p").css("background-color","red");`,
+        value: 400,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JQUERY",
+        question: "With jQuery, look at the following selector: $(\"div.intro\"). What does it select?"
+        ,
+        possibleAns: [
+            `The first div element with id="intro"`,
+            `All div elements with class="intro"`,
+            `The first div element with class="intro"`
+        ],
+        correctAns: `All div elements with class="intro"`,
+        value: 600,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JQUERY",
+        question: "Which jQuery method is used to hide selected elements?"
+        ,
+        possibleAns: [
+            `hidden()`,
+            `visible(false)`,
+            `hide()`
+        ],
+        correctAns: `hide()`,
+        value: 800,
+        hasBeenUsed: false,
+    },
+    {
+        category: "JQUERY",
+        question: "What is the correct jQuery code for making all div elements 100 pixels high?"
+        ,
+        possibleAns: [
+            `$("div").height="100"`,
+            `$("div").height(100)`,
+            `$("div").yPos(100)`
+        ],
+        correctAns: `$("div").height(100)`,
+        value: 1000,
+        hasBeenUsed: false,
+    }
 ];
 
 let players = {
@@ -448,7 +551,7 @@ let game = {
         } else if (players.player1.score < players.player2.score){
             return players.player2;
         }   else if (players.player1.score === players.player2.score){
-            return { name: "No One! Play again!", score: players.player1.score};
+            return { name: "Draw! Play again!", score: players.player1.score};
         }   else {
             console.log("error in game.calculateWinner...")
         }
