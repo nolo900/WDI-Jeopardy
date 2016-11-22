@@ -1,6 +1,6 @@
 # WDI Jeopardy
 
-This project demonstrates simple DOM manipulation, user interaction handling, and light CRUD operations.
+This project demonstrates simple DOM manipulation, user interaction handling, and storing/retrieving data from a object library.
 
 ## Project Description
 
@@ -31,8 +31,8 @@ https://trello.com/b/PQHf3QYj/wdi-project-1-jeopardy
 
 ### Technologies Used
 
-Materialize CSS Framework -> http://materializecss.com/
-JQuery Javascript Library -> https://jquery.com/
-Accounting.js (Javascript Currency Library) -> https://www.npmjs.com/package/accounting-js
-PUG HTML Preprocessor -> https://pugjs.org/api/getting-started.html
-SCSS CSS Preprocessor -> http://sass-lang.com/
+* Materialize CSS Framework -> http://materializecss.com/
+* JQuery Javascript Library -> https://jquery.com/
+* Accounting.js (Javascript Currency Library) -> https://www.npmjs.com/package/accounting-js
+* PUG HTML Preprocessor -> https://pugjs.org/api/getting-started.html
+* SCSS CSS Preprocessor -> http://sass-lang.com/
