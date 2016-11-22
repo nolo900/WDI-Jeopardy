@@ -7,7 +7,7 @@ $(document).ready(function(){
     //$("#startButton").click(loadStartModal);
 
     $("#resetButton").click(resetGame);
-    $("#resetButton").hide();
+
 
     $("#player1name").blur(storeName);
     $("#player2name").blur(storeName);
@@ -433,13 +433,25 @@ let game = {
     },
 
     isEndOfGame: function() {
+        var gameOver = true;
         questionLibrary.forEach(function (item) {
             if (item.hasBeenUsed === false){
-                return false ;
-            } else {
-                return true;
+                gameOver = false;
             }
         });
+        return gameOver;
+    },
+
+    calculateWinner: function () {
+        if (players.player1.score > players.player2.score){
+            return players.player1;
+        } else if (players.player1.score < players.player2.score){
+            return players.player2;
+        }   else if (players.player1.score === players.player2.score){
+            return "Draw!";
+        }   else {
+            return "Error...";
+        }
     }
 
 };
@@ -472,10 +484,16 @@ function processAnswer(){
 
     if (game.isEndOfGame()){
         //Display winner modal with player of highest score
-        // resetGame();
+        //alert("Game won!");
+
+        $('#winnerDisplayPlayer').text(game.calculateWinner().name);
+        $('#winnerDisplayScore').text("Score: " + accounting.formatMoney(game.calculateWinner().score,"$",0));
+
+
+        $("#endOfGameModal").modal('open');
+        window.setTimeout(function() {$("#endOfGameModal").modal('close');}, 5000);
+        resetGame();
     }
-
-
 
 }
 
@@ -536,8 +554,6 @@ function loadModal(){
 
 function loadStartModal(){
     $("#startModal").modal('open');
-    $('#startButton').hide();
-    $('#resetButton').show();
     $('.question-card').removeClass('disabled');
     window.setTimeout(function() {$("#startModal").modal('close');}, 3500);
 }
@@ -568,11 +584,7 @@ function resetGame() {
     $('#player1name').text("Player 1");
     $('#player2name').text("Player 2");
 
-    $('#resetButton').hide();
-    $('#startButton').show();
-
 }
-
 
 function storeName(){
     let realName = $("#" + this.id).text();
@@ -584,8 +596,7 @@ function storeName(){
     }
 }
 
-function HtmlEncode(s)
-{
+function HtmlEncode(s) {
     var el = document.createElement("div");
     el.innerText = el.textContent = s;
     s = el.innerHTML;
