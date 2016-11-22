@@ -1,36 +1,28 @@
-# Project Title
+# WDI Jeopardy
 
-One Paragraph of project description goes here
+This project demonstrates simple DOM manipulation, user interaction handling, and light CRUD operations.
 
-## Getting Started
+## Project Description
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is a two player game that toggles between players when a question has been answered incorrectly. The game keeps track of the user's score and name and determines a winner once all the questions have been answered.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
+### User Stories
 
 A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
+### Link to the Deployed App
 
-```
-Give the example
-```
+### Link to the Trello Board
 
-And repeat
+https://trello.com/b/PQHf3QYj/wdi-project-1-jeopardy
 
-```
-until finished
-```
+### Wirefames/Mockups
 
-End with an example of getting some data out of the system or using it for a little demo
+![Alt text](dist/images/WDI-Jeopardy_ScreenShot.png?raw=true "WDI Jeopardy ScreenShot")
+
+### Technologies Used
+
+
 
 ## Running the tests
 
