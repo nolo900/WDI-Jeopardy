@@ -448,9 +448,9 @@ let game = {
         } else if (players.player1.score < players.player2.score){
             return players.player2;
         }   else if (players.player1.score === players.player2.score){
-            return "Draw!";
+            return { name: "No One! Play again!", score: players.player1.score};
         }   else {
-            return "Error...";
+            console.log("error in game.calculateWinner...")
         }
     }
 
@@ -483,15 +483,12 @@ function processAnswer(){
     game.currentQuestion = null;
 
     if (game.isEndOfGame()){
-        //Display winner modal with player of highest score
-        //alert("Game won!");
-
         $('#winnerDisplayPlayer').text(game.calculateWinner().name);
         $('#winnerDisplayScore').text("Score: " + accounting.formatMoney(game.calculateWinner().score,"$",0));
 
-
         $("#endOfGameModal").modal('open');
         window.setTimeout(function() {$("#endOfGameModal").modal('close');}, 5000);
+
         resetGame();
     }
 
@@ -541,7 +538,6 @@ function loadModal(){
     ans2 = '<pre class="prettyprint"><code>' + ans2 + '</code></pre>';
     ans3 = '<pre class="prettyprint"><code>' + ans3 + '</code></pre>';
 
-
     $("#modal-header").text(game.currentQuestion.category + " for $" + game.currentQuestion.value);
     $("#modal-question").text(getQuestions(cardCat,cardValue).question);
     $("#q1").html(ans1);
@@ -549,7 +545,6 @@ function loadModal(){
     $("#q3").html(ans3);
 
     $("#modal1").modal('open');
-
 }
 
 function loadStartModal(){
