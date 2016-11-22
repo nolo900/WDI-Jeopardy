@@ -18,7 +18,7 @@ https://trello.com/b/PQHf3QYj/wdi-project-1-jeopardy
 
 ### Wirefames/Mockups
 
-![Alt text](dist/images/WDI-Jeopardy_ScreenShot.png?raw=true "WDI Jeopardy ScreenShot")
+![Alt text](/dist/images/WDI-Jeopardy_ScreenShot.png?raw=true "WDI Jeopardy ScreenShot")
 
 ### Technologies Used
 
