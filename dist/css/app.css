@@ -7086,7 +7086,7 @@ body.parallax-demo footer {
 
 @font-face {
   font-family: 'gyparody';
-  src: url("fonts/gyparody/gyparody hv.ttf"); }
+  src: url("../fonts/gyparody_rg.ttf"); }
 
 html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif; }
@@ -7112,7 +7112,8 @@ header {
   outline: 0; }
 
 .chip {
-  background-color: #8bc34a; }
+  background-color: #8bc34a;
+  font-size: 20px; }
 
 .col.s2.card {
   text-align: center; }
@@ -7127,7 +7128,8 @@ header {
   width: 100%;
   margin: 5px;
   display: block !important;
-  margin-top: 10px; }
+  margin-top: 10px;
+  text-wrap: normal; }
 
 .btn.btn-large, .btn-large {
   background-color: #76ff03;
@@ -7142,14 +7144,14 @@ header {
   margin: 15px; }
 
 code {
-  text-align: center;
+  text-align: left;
   color: white;
   font-size: 1em;
   margin-left: 10px;
   border: none; }
 
 pre {
-  text-align: left;
+  text-align: center;
   background-color: #e65100;
   border: 20px solid black; }
   pre:hover {
