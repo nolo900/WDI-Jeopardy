@@ -1,6 +1,10 @@
 @import 'bourbon';
 @import 'materialize';
 @import 'style';
+@font-face {
+  font-family: 'gyparody';
+  src: url('fonts/gyparody/gyparody hv.ttf');
+}
 
 //$JeopardyPurple: #311b92;
 $mainBackgroundColor: #0277bd;
@@ -19,6 +23,15 @@ body {
   margin: 20px;
 
   min-width: 1200px;
+}
+header{
+  font-family: gyparody;
+  font-size: 130px;
+  color: white;
+  line-height: 130px;
+  padding: 0;
+  margin: 50px;
+
 }
 
 .col.card-panel{
@@ -106,16 +119,21 @@ code {
   color:white;
   font-size: 1em;
   margin-left: 10px;
+  border: none;
 }
 
 pre{
   text-align: left;
   background-color: $codeBox;
-  border: none;
+  border: 20px solid black;
 
   &:hover{
     background-color: lighten($codeBox, 10%);
     @extend .z-depth-4;
+  }
+
+  &.prettyprint{
+    border: none !important;
   }
 
 }
@@ -129,8 +147,8 @@ pre{
   color:white;
   position: fixed;
   z-index: 20;
-  top: 10;
-  right: 10;
+  top: 10px;
+  right: 10px;
   @extend .z-depth-4;
 
 }

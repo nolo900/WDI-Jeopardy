@@ -8,7 +8,6 @@ $(document).ready(function(){
 
     $("#resetButton").click(resetGame);
 
-
     $("#player1name").blur(storeName);
     $("#player2name").blur(storeName);
 
@@ -557,7 +556,7 @@ let game = {
         }
     }
 
-};
+}
 
 function processAnswer(){
     var myAnswerButton = this;

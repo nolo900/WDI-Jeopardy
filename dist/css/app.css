@@ -7084,6 +7084,10 @@ body.parallax-demo footer {
         background-color: #eee;
         outline: none; }
 
+@font-face {
+  font-family: 'gyparody';
+  src: url("fonts/gyparody/gyparody hv.ttf"); }
+
 html {
   font-family: GillSans, Calibri, Trebuchet, sans-serif; }
 
@@ -7091,6 +7095,14 @@ body {
   background-color: #0277bd;
   margin: 20px;
   min-width: 1200px; }
+
+header {
+  font-family: gyparody;
+  font-size: 130px;
+  color: white;
+  line-height: 130px;
+  padding: 0;
+  margin: 50px; }
 
 .col.card-panel {
   background-color: #009382;
@@ -7133,19 +7145,22 @@ code {
   text-align: center;
   color: white;
   font-size: 1em;
-  margin-left: 10px; }
+  margin-left: 10px;
+  border: none; }
 
 pre {
   text-align: left;
   background-color: #e65100;
-  border: none; }
+  border: 20px solid black; }
   pre:hover {
     background-color: #ff6b1a; }
+  pre.prettyprint {
+    border: none !important; }
 
 #resetButton {
   background-color: #e51c23;
   color: white;
   position: fixed;
   z-index: 20;
-  top: 10;
-  right: 10; }
+  top: 10px;
+  right: 10px; }
